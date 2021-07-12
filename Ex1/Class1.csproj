@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Menu.cs" />
     <Compile Include="MenuOpcoes.cs" />
-    <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

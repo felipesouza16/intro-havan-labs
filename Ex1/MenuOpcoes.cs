@@ -42,11 +42,22 @@ namespace Class1
                         List<Usuario> usuarios= new List<Usuario>();
                         do
                         {
-                            Usuario user = new Usuario();
-                            user.CadastroUsuario();
+                            Console.WriteLine("Digite seu nome: ");
+                            string nome = Validacao.ValidaString();
+                            nome = Char.ToUpper(nome[0]) + nome.Substring(1);
+                            Console.WriteLine("Digite seu sobrenome: ");
+                            string sobrenome = Validacao.ValidaString();
+                            sobrenome = char.ToUpper(sobrenome[0]) + sobrenome.Substring(1);
+                            Console.WriteLine($"{nome} {sobrenome}, digite sua idade: ");
+                            int idade = Validacao.ValidaInt();
+                            Console.WriteLine($"{nome} {sobrenome}, digite seu e-mail: ");
+                            string email = Console.ReadLine();
+                            Console.WriteLine("Digite seu endereço: ");
+                            string endereco = Console.ReadLine();
+                            Usuario user = new Usuario(nome, sobrenome, idade, email, endereco);
+                            usuarios.Add(user);
                             Console.WriteLine("Deseja cadastrar mais 1? y/n");
                             resposta = Console.ReadLine();
-                            usuarios.Add(user);
                         } while (resposta == "y");
 
                         //Usuario userSelect1 = usuarios.FirstOrDefault(u => u.nome.Equals("joelma"));
@@ -54,9 +65,7 @@ namespace Class1
 
                         foreach (var item in usuarios)
                         {
-                            Console.WriteLine($" Nome: {item.nome} {item.sobrenome}\n Idade: {item.idade}  \n E-mail: {item.email}\n Cidade: {item.cidade}\n" +
-                            $" Bairro: {item.bairro}\n Rua: {item.rua}\n Numero da casa: {item.casa}\n");
-                            
+                            Console.WriteLine($" Nome: {item.Nome} {item.Sobrenome}\n Idade: {item.Idade}  \n E-mail: {item.Email}\n Endereço: {item.Endereco}\n");
                         }
                         break;
                     case 2:
