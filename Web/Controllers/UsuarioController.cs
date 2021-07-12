@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Web.Models;
-
 
 namespace Web.Controllers
 {
@@ -18,7 +17,12 @@ namespace Web.Controllers
         }
         public ActionResult List()
         {
-            return View(listaUsuarios);
+            List<Usuario> model = new List<Usuario>();
+            using (var context = new HavanLabsContext())
+            {
+                model = context.Usuarios.ToList();
+            }
+            return View(model);
         }
         public ActionResult Create()
         {
@@ -27,8 +31,26 @@ namespace Web.Controllers
         [HttpPost]
         public  ActionResult Create(Usuario model)
         {
-            listaUsuarios.Add(model);
+            using (var context = new HavanLabsContext())
+            {
+                context.Usuarios.Add(model);
+                context.SaveChanges();
+            }
             return RedirectToAction("List");     
+        }
+        public ActionResult Update(int id)
+        {
+            Usuario model = new Usuario();
+            using (var context = new HavanLabsContext())
+            {
+               model = context.Usuarios.Find(id);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Update(Usuario model)
+        {
+            return View();
         }
     }
 }
